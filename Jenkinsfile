@@ -2,14 +2,16 @@ pipeline {
   agent any
  
   stages {
+    
     stage ('push_to_test') {
       steps {
         build job: 'push_to_test'
+        result = check
       }
     }
     stage ('test'){
       steps {
-      if (push_to_test == 'success')
+      if (check == 'success')
       build job: 'push_to_prod'
       
       }
