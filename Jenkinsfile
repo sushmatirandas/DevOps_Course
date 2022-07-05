@@ -1,19 +1,18 @@
 pipeline {
   agent any
  
-  tools {
-  maven 'Maven3'
-  }
   stages {
     stage ('push_to_test') {
       steps {
         build job: 'push_to_test'
       }
     }
-    stage ('Build') {
+    stage {'test'){
       steps {
-      sh 'mvn clean install -f MyWebApp/pom.xml'
+      if (push_to_test == 'success')
+      build job: 'push_to_prod'
+      
       }
     }
-    }
 }
+  }
