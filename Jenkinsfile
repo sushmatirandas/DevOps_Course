@@ -1,5 +1,5 @@
 pipeline {
-  agent {test_jnlp}
+  agent [test_jnlp]
  
   tools {
   maven 'Maven3'
